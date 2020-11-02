@@ -25,9 +25,6 @@ app.use(cors());
 
 //#region Routes
 app.use('/', indexRouter);
-app.use('/ConceptosDePago', conceptosDePagoRouter);
-app.use('/Proveedores', proveedoresRouter);
-app.use('/EntradasDeDocumento', entradasDeDocumentoRouter);
 app.use('/Usuarios', usuariosRouter);
 //#endregion
 
