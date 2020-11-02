@@ -1,0 +1,7 @@
+{
+    "dialect": "mssql",
+    "server": "GBH-L094\\SQLEXPRESS",
+    "databaseName": "db",
+    "trustedConnection": "yes",
+    "driver": "SQL Server Native Client 11.0"
+}
