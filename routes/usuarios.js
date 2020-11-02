@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const usuario = require('../config/connections/cxp/models/usuario.js');
+const usuario = require('../config/connections/base/models/usuario.js');
 const UsuariosService = require('../services/usuarios-service.js');
 const usuariosService = new UsuariosService(usuario);
 const setBaseRoutes = require('./base-routes.js');
