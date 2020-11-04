@@ -22,7 +22,7 @@ module.exports = class UsuariosRepository extends BaseRepository {
                 this.response.success = true;
             }
         } catch(error) {
-            this.response.message = error;
+            this.response.message = error.toString();
         }
         return this.response;
     }
