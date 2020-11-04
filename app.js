@@ -45,6 +45,7 @@ app.use(function (err, req, res, next) {
 });
 
 const server = require('./config/server.json');
+const config = require('./config/config.json');
 
 app.listen(server.port, () => {
     console.log(`App listening at http://${server.hostname}:${server.port}`);
@@ -54,9 +55,9 @@ app.listen(server.port, () => {
     (async () => {
         try {
             await sequelize.authenticate();
-            console.log(`Connection to 'db' has been established successfully.`);
+            console.log(`Connection to '${config.development.database}' has been established successfully.`);
         } catch (error) {
-            console.error(`Unable to connect to 'db': `, error);
+            console.error(`Unable to connect to '${config.development.database}': `, error);
         }
     
         // await sequelize.sync({force: true});

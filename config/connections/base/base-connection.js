@@ -1,15 +1,11 @@
 const { Sequelize } = require('sequelize');
-const database = require('./base-database.json');
+const config = require('../../config.json');
 
 const sequelize = new Sequelize({
-    dialect: database.dialect,
-    dialectModule: require('msnodesqlv8/lib/sequelize'),
+    dialect: config.development.dialect,
+    dialectModule: require(config.development.dialectModulePath),
     bindParam: false,
-    dialectOptions: {
-        options: {
-            connectionString: `Driver={${database.driver}};Server=${database.server};Database=${database.databaseName};Trusted_Connection=${database.trustedConnection};`
-        }
-    }
+    dialectOptions: config.development.dialectOptions
 });
 
 module.exports = sequelize;
