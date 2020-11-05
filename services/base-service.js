@@ -15,10 +15,6 @@ module.exports = class BaseService {
         return await this.repository.create(entity);
     }
 
-    async createMany(entities) {
-        return await this.repository.createMany(entities);
-    }
-
     async update(entity) {
         return await this.repository.update(entity);
     }
@@ -27,7 +23,11 @@ module.exports = class BaseService {
         return await this.repository.delete(id);
     }
 
-    async getByEntity(entity) {
-        return await this.repository.getByEntity(entity);
+    async filter(entity, fechaInicio, fechaFin) {
+        return await this.repository.filter(entity, fechaInicio, fechaFin);
+    }
+
+    async createMany(entities) {
+        return await this.repository.createMany(entities);
     }
 }

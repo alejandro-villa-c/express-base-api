@@ -33,7 +33,9 @@ function setBaseRoutes(router, service) {
     });
 
     router.post('/filter', async (req, res, next) => {
-        const response = await service.getByEntity(req.body);
+        const fechaInicio = req.query.fechaInicio;
+        const fechaFin = req.query.fechaFin;
+        const response = await service.filter(req.body, fechaInicio, fechaFin);
         res.json(response);
     });
 }

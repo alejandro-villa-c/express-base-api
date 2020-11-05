@@ -86,11 +86,33 @@ module.exports = class BaseRepository {
         return this.response;
     }
 
-    async getByEntity(entity) {
+    async filter(entity, fechaInicio, fechaFin) {
         this.response = new Response();
         try {
+            let createdAtGreaterThan = null;
+            if (fechaInicio) {
+                createdAtGreaterThan = {
+                    createdAt: {
+                        [Op.gte]: fechaInicio
+                    }
+                };
+            }
+            let createdAtLessThan = null;
+            if (fechaFin) {
+                createdAtLessThan = {
+                    createdAt: {
+                        [Op.lte]: fechaFin
+                    }
+                };
+            }
             const entities = await this.model.findAll({
-                where: entity
+                where: {
+                    [Op.and]: [
+                        ...Object.keys(entity).map((key) => ({ [key]: entity[key] })),
+                        createdAtGreaterThan,
+                        createdAtLessThan
+                    ]
+                }
             });
             this.response.data = entities;
             this.response.success = true;
