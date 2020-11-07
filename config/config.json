@@ -4,7 +4,7 @@
         "dialectModulePath": "msnodesqlv8/lib/sequelize",
         "dialectOptions": {
             "options": {
-                "connectionString": "Driver={SQL Server Native Client 11.0};Server=GBH-L094\\SQLEXPRESS;Database=base_db;Trusted_Connection=yes;"
+                "connectionString": "Driver={SQL Server Native Client 11.0};Server=GBH-L094\\SQLEXPRESS;Trusted_Connection=yes;"
             }
         },
         "host": "GBH-L094\\SQLEXPRESS",
