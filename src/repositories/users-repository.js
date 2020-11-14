@@ -1,24 +1,24 @@
 const BaseRepository = require('./base-repository.js');
 const Response = require('./models/response.js');
 
-module.exports = class UsuariosRepository extends BaseRepository {
+module.exports = class UsersRepository extends BaseRepository {
     constructor(model) {
         super(model);
     }
 
-    async login(usuario) {
+    async login(user) {
         this.response = new Response();
         try {
-            const usuarios = await this.model.findAll({
+            const users = await this.model.findAll({
                 where: {
-                   nombreDeUsuario: usuario.nombreDeUsuario,
-                   contrasena: usuario.contrasena
+                   username: user.username,
+                   password: user.password
                 }
             });
-            if (usuarios.length === 0) {
+            if (users.length === 0) {
                 this.response.message = `Incorrect username or password.`;
             } else {
-                this.response.data.push(usuarios[0]);
+                this.response.data.push(users[0]);
                 this.response.success = true;
             }
         } catch(error) {

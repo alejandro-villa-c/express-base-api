@@ -23,8 +23,8 @@ module.exports = class BaseService {
         return await this.repository.delete(id);
     }
 
-    async filter(entity, fechaInicio, fechaFin) {
-        return await this.repository.filter(entity, fechaInicio, fechaFin);
+    async filter(entity, startDate, endDate) {
+        return await this.repository.filter(entity, startDate, endDate);
     }
 
     async createMany(entities) {

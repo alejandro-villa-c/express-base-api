@@ -1,4 +1,5 @@
 const Response = require('./models/response.js');
+const { Op } = require('sequelize');
 
 module.exports = class BaseRepository {
     constructor(model) {
@@ -86,22 +87,22 @@ module.exports = class BaseRepository {
         return this.response;
     }
 
-    async filter(entity, fechaInicio, fechaFin) {
+    async filter(entity, startDate, endDate) {
         this.response = new Response();
         try {
             let createdAtGreaterThan = null;
-            if (fechaInicio) {
+            if (startDate) {
                 createdAtGreaterThan = {
                     createdAt: {
-                        [Op.gte]: fechaInicio
+                        [Op.gte]: startDate
                     }
                 };
             }
             let createdAtLessThan = null;
-            if (fechaFin) {
+            if (endDate) {
                 createdAtLessThan = {
                     createdAt: {
-                        [Op.lte]: fechaFin
+                        [Op.lte]: endDate
                     }
                 };
             }

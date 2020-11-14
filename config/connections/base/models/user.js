@@ -1,24 +1,24 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../base-connection.js');
 
-class Usuario extends Model {}
+class User extends Model {}
 
-Usuario.init({
-    nombre: {
+User.init({
+    fullName: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    nombreDeUsuario: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    contrasena: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }, {
     sequelize,
-    tableName: 'usuarios'
+    tableName: 'users'
 });
 
-module.exports = sequelize.models.Usuario;
+module.exports = sequelize.models.User;

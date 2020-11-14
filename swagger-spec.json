@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Base API"
+  },
+  "host": "127.0.0.1:3000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "john"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullName": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "john"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123"
+                }
+              },
+              "required": [
+                "fullName",
+                "username",
+                "password"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "fullName": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "john"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123"
+                }
+              },
+              "required": [
+                "id",
+                "fullName",
+                "username",
+                "password"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/filter": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "type": "string",
+            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "type": "string",
+            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "fullName": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "john"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {}
+}

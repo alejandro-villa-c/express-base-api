@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/nodemon app.js",
+    "start": "./node_modules/.bin/nodemon src/app.js",
     "create-db": "./node_modules/.bin/sequelize-cli db:create"
   },
   "dependencies": {
@@ -16,6 +16,8 @@
     "morgan": "~1.9.1",
     "msnodesqlv8": "^2.0.5",
     "sequelize": "^5.22.3",
+    "swagger-autogen": "^1.2.5",
+    "swagger-ui-express": "^4.1.4",
     "tedious": "^9.2.1"
   },
   "devDependencies": {

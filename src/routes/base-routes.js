@@ -33,9 +33,9 @@ function setBaseRoutes(router, service) {
     });
 
     router.post('/filter', async (req, res, next) => {
-        const fechaInicio = req.query.fechaInicio;
-        const fechaFin = req.query.fechaFin;
-        const response = await service.filter(req.body, fechaInicio, fechaFin);
+        const startDate = req.query.startDate;
+        const endDate = req.query.endDate;
+        const response = await service.filter(req.body, startDate, endDate);
         res.json(response);
     });
 }
