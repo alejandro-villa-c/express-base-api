@@ -25,7 +25,7 @@ app.use(cors());
 //#region Routes
 const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users.js');
-const docsUrl = '/api-docs/';
+const docsUrl = '/api-docs';
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //#endregion
