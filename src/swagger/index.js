@@ -38,7 +38,7 @@ module.exports = (
                     );
                     next();
                 });
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
                 next();
             }

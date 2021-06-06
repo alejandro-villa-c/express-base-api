@@ -177,13 +177,13 @@
             "name": "startDate",
             "in": "query",
             "type": "string",
-            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ"
+            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ or yyyy-MM-ddTHH:mm:ss.SSS+00:00"
           },
           {
             "name": "endDate",
             "in": "query",
             "type": "string",
-            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ"
+            "format": "yyyy-MM-ddTHH:mm:ss.SSSZ or yyyy-MM-ddTHH:mm:ss.SSS+00:00"
           },
           {
             "name": "user",
@@ -210,6 +210,48 @@
                 }
               }
             }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/createMany": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "users",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fullName": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "123"
+                  }
+                },
+                "required": [
+                  "fullName",
+                  "username",
+                  "password"
+                ]
+              }
+            },
+            "required": true
           }
         ],
         "responses": {}

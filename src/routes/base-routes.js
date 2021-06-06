@@ -1,4 +1,4 @@
-function setBaseRoutes(router, service) {
+const setBaseRoutes = (router, service) => {
     router.get('/', async (req, res, next) => {
         const response = await service.getAll();
         res.json(response);
@@ -36,6 +36,11 @@ function setBaseRoutes(router, service) {
         const startDate = req.query.startDate;
         const endDate = req.query.endDate;
         const response = await service.filter(req.body, startDate, endDate);
+        res.json(response);
+    });
+
+    router.post('/createMany', async (req, res, next) => {
+        const response = await service.createMany(req.body);
         res.json(response);
     });
 }

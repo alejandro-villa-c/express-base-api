@@ -60,22 +60,48 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(server.port, () => {
-    const config = require('../config/config.json');
-    const sequelize = require('../config/connections/base/base-connection.js');
-
-    (async () => {
-        try {
-            await sequelize.authenticate();
-            console.log(`Connection to '${config.development.database}' has been established successfully.`);
-        } catch (error) {
-            console.error(`Unable to connect to '${config.development.database}': `, error);
-        }
-    
-        // await sequelize.sync({force: true});
-        await sequelize.sync();
-    })();
-
+    // (async () => {
+    //     await setSequelize();
+    // })();
+    setMongoose();
     console.log(`App listening at http://${server.hostname}:${server.port}`);
 });
+
+const setMongoose = () => {
+    const mongoose = require('mongoose');
+    const config = require('../config/mongoose/config.json');
+    mongoose.connect(
+        `
+            mongodb://${config.development.hostname}:${config.development.port}
+        `,
+        {
+            useNewUrlParser: config.development.useNewUrlParser,
+            useUnifiedTopology: config.development.useUnifiedTopology,
+            readPreference: config.development.readPreference,
+            appname: config.development.appname,
+            ssl: config.development.ssl,
+            dbName: config.development.database
+        }
+    );
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', () => {
+        console.log(`Connection to ${config.development.appname} has been established successfully.`);
+    });
+}
+
+const setSequelize = async () => {
+    const config = require('../config/sequelize/config.json');
+    const sequelize = require('../config/sequelize/connections/base-connection.js');
+    try {
+        await sequelize.authenticate();
+        console.log(`Connection to '${config.development.database}' has been established successfully.`);
+    } catch (error) {
+        console.error(`Unable to connect to '${config.development.database}': `, error);
+    }
+
+    /** Pass { force: true } to sync function to change database structure. */
+    await sequelize.sync();
+}
 
 module.exports = app;

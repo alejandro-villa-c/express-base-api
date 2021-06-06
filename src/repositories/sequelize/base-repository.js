@@ -1,4 +1,4 @@
-const Response = require('./models/response.js');
+const Response = require('../models/response.js');
 const { Op } = require('sequelize');
 
 module.exports = class BaseRepository {
@@ -13,7 +13,7 @@ module.exports = class BaseRepository {
             const entities = await this.model.findAll();
             this.response.data = entities;
             this.response.success = true;
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
@@ -33,7 +33,7 @@ module.exports = class BaseRepository {
                 this.response.data.push(entities[0]);
                 this.response.success = true;
             }
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
@@ -45,7 +45,7 @@ module.exports = class BaseRepository {
             const createdEntity = await this.model.create(entity);
             this.response.data.push(createdEntity);
             this.response.success = true;
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
@@ -63,7 +63,7 @@ module.exports = class BaseRepository {
             } else {
                 this.response.setNotFoundMessage(updatedEntity.id);
             }
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
@@ -80,6 +80,8 @@ module.exports = class BaseRepository {
                     }
                 });
                 this.response.success = true;
+            } else {
+                this.response.setNotFoundMessage(id);
             }
         } catch (error) {
             this.response.message = error.toString();
@@ -117,7 +119,7 @@ module.exports = class BaseRepository {
             });
             this.response.data = entities;
             this.response.success = true;
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
@@ -129,7 +131,7 @@ module.exports = class BaseRepository {
             const createdEntities = await this.model.bulkCreate(entities);
             this.response.data = createdEntities;
             this.response.success = true;
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;

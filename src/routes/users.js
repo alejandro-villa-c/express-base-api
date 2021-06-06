@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const user = require('../../config/connections/base/models/user.js');
+// const user = require('../../config/sequelize/connections/models/user.js');
+const user = require('../../config/mongoose/models/user.js');
 const UsersService = require('../services/users-service.js');
 const usersService = new UsersService(user);
 const setBaseRoutes = require('./base-routes.js');
@@ -100,12 +101,12 @@ module.exports = router;
         #swagger.parameters['startDate'] = {
             in: 'query',
             type: 'string',
-            format: 'yyyy-MM-ddTHH:mm:ss.SSSZ'
+            format: 'yyyy-MM-ddTHH:mm:ss.SSSZ or yyyy-MM-ddTHH:mm:ss.SSS+00:00'
         }
         #swagger.parameters['endDate'] = {
             in: 'query',
             type: 'string',
-            format: 'yyyy-MM-ddTHH:mm:ss.SSSZ'
+            format: 'yyyy-MM-ddTHH:mm:ss.SSSZ or yyyy-MM-ddTHH:mm:ss.SSS+00:00'
         }
         #swagger.parameters['user'] = {
             in: 'body',
@@ -116,6 +117,25 @@ module.exports = router;
                 username: "john",
                 password: "123"
             }
+        }
+    */
+// #swagger.end
+// #swagger.start
+    /*
+        #swagger.tags = ['Users']
+        #swagger.path = '/users/createMany'
+        #swagger.method = 'post'
+        #swagger.parameters['users'] = {
+            in: 'body',
+            type: 'object',
+            schema: [
+                {
+                    $fullName: "John Doe",
+                    $username: "john",
+                    $password: "123"
+                }
+            ],
+            required: true
         }
     */
 // #swagger.end

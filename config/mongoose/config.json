@@ -1,0 +1,12 @@
+{
+    "development": {
+        "hostname": "127.0.0.1",
+        "port": "27017",
+        "database": "base_db",
+        "readPreference": "primary",
+        "appname": "MongoDB%20Compass",
+        "ssl": false,
+        "useNewUrlParser": true,
+        "useUnifiedTopology": true
+    }
+}

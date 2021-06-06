@@ -1,5 +1,5 @@
 const BaseRepository = require('./base-repository.js');
-const Response = require('./models/response.js');
+const Response = require('../models/response.js');
 
 module.exports = class UsersRepository extends BaseRepository {
     constructor(model) {
@@ -9,19 +9,17 @@ module.exports = class UsersRepository extends BaseRepository {
     async login(user) {
         this.response = new Response();
         try {
-            const users = await this.model.findAll({
-                where: {
-                   username: user.username,
-                   password: user.password
-                }
-            });
-            if (users.length === 0) {
+            const foundUser = await this.model.findOne({
+                username: user.username,
+                password: user.password
+            }).exec();
+            if (!foundUser) {
                 this.response.message = `Incorrect username or password.`;
             } else {
-                this.response.data.push(users[0]);
+                this.response.data.push(foundUser);
                 this.response.success = true;
             }
-        } catch(error) {
+        } catch (error) {
             this.response.message = error.toString();
         }
         return this.response;
