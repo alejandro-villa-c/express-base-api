@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 // const user = require('../../config/sequelize/connections/models/user.js');
 const user = require('../../config/mongoose/models/user.js');
 const UsersService = require('../services/users-service.js');
@@ -112,10 +112,10 @@ module.exports = router;
             in: 'body',
             type: 'object',
             schema: {
-                id: 1,
-                fullName: "John Doe",
-                username: "john",
-                password: "123"
+                $id: 1,
+                $fullName: "John Doe",
+                $username: "john",
+                $password: "123"
             }
         }
     */

@@ -1,14 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var swagger = require('./swagger');
-var server = require('../config/server.json');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const swagger = require('./swagger');
+const server = require('../config/server.json');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -25,22 +25,23 @@ app.use(cors());
 //#region Routes
 const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users.js');
-const docsUrl = '/api-docs';
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//#endregion
-
+const docsUrl = '/api-docs';
 app.use(docsUrl, swagger({
     apiName: 'Base API',
     host: `${server.hostname}:${server.port}`,
     schemes: ['http'],
     swaggerSpecFilePath: './swagger-spec.json',
-    endpointsFiles: ['./src/routes/users.js'],
+    endpointsFiles: [
+        './src/routes/users.js'
+    ],
     docsUrl: docsUrl
 }));
+//#endregion
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     if (!req.url.includes(docsUrl)) {
         next(createError(404));
     } else {
@@ -49,7 +50,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
