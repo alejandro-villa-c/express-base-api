@@ -3,8 +3,8 @@ module.exports = class BaseService {
         this.repository = repository;
     }
 
-    async getAll() {
-        return await this.repository.getAll();
+    async getAll(sortBy, page, perPage) {
+        return await this.repository.getAll(sortBy, page, perPage);
     }
 
     async getById(id) {
@@ -23,8 +23,8 @@ module.exports = class BaseService {
         return await this.repository.delete(id);
     }
 
-    async filter(entity, startDate, endDate) {
-        return await this.repository.filter(entity, startDate, endDate);
+    async filter(entity, sortBy, page, perPage, startDate, endDate) {
+        return await this.repository.filter(entity, sortBy, page, perPage, startDate, endDate);
     }
 
     async createMany(entities) {

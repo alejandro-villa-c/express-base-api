@@ -1,6 +1,9 @@
 const setBaseRoutes = (router, service) => {
     router.get('/', async (req, res, next) => {
-        const response = await service.getAll();
+        const sortBy = req.query.sortBy || 'createdAt.desc';
+        const page = +(req.query.page) && +(req.query.page) > 0 ? +(req.query.page) : 1;
+        const perPage = +(req.query.perPage) && +(req.query.perPage) > 0 ? +(req.query.perPage) : 20;
+        const response = await service.getAll(sortBy, page, perPage);
         res.json(response);
     });
 
@@ -33,9 +36,12 @@ const setBaseRoutes = (router, service) => {
     });
 
     router.post('/filter', async (req, res, next) => {
+        const sortBy = req.query.sortBy || 'createdAt.desc';
+        const page = +(req.query.page) && +(req.query.page) > 0 ? +(req.query.page) : 1;
+        const perPage = +(req.query.perPage) && +(req.query.perPage) > 0 ? +(req.query.perPage) : 20;
         const startDate = req.query.startDate;
         const endDate = req.query.endDate;
-        const response = await service.filter(req.body, startDate, endDate);
+        const response = await service.filter(req.body, sortBy, page, perPage, startDate, endDate);
         res.json(response);
     });
 

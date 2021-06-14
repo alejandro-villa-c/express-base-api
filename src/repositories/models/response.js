@@ -3,6 +3,7 @@ module.exports = class Response {
         this.data = [];
         this.success = false;
         this.message = null;
+        this.totalRecords = null;
     }
 
     setNotFoundMessage(id) {

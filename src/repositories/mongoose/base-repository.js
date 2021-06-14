@@ -6,12 +6,25 @@ module.exports = class BaseRepository {
         this.response = new Response();
     }
 
-    async getAll() {
+    async getAll(sortBy, page, perPage) {
         this.response = new Response();
         try {
-            const entities = await this.model.find({});
+            let sortByExpression = {};
+            if (sortBy) {
+                const [propertyToSortBy, direction] = sortBy.split('.');
+                sortByExpression = {
+                    [propertyToSortBy]: direction
+                };
+            }
+            const entities = await this.model
+                .find({})
+                .sort(sortByExpression)
+                .limit(perPage)
+                .skip(perPage * (page - 1));
+            const entitiesCount = await this.model.countDocuments({});
             this.response.data = entities;
             this.response.success = true;
+            this.response.totalRecords = entitiesCount;
         } catch (error) {
             this.response.message = error.toString();
         }
@@ -77,7 +90,7 @@ module.exports = class BaseRepository {
         return this.response;
     }
 
-    async filter(entity, startDate, endDate) {
+    async filter(entity, sortBy, page, perPage, startDate, endDate) {
         this.response = new Response();
         try {
             let findQuery = {
@@ -101,7 +114,19 @@ module.exports = class BaseRepository {
                     createdAt
                 };
             }
-            const entities = await this.model.find(findQuery).exec();
+            let sortByExpression = {};
+            if (sortBy) {
+                const [propertyToSortBy, direction] = sortBy.split('.');
+                sortByExpression = {
+                    [propertyToSortBy]: direction
+                };
+            }
+            const entities = await this.model
+                .find(findQuery)
+                .sort(sortByExpression)
+                .limit(perPage)
+                .skip(perPage * (page - 1))
+                .exec();
             this.response.data = entities;
             this.response.success = true;
         } catch (error) {
@@ -122,7 +147,6 @@ module.exports = class BaseRepository {
             });
             const response = await this.model.bulkWrite(createManyQuery);
             if (response.nInserted > 0) {
-                console.log(Object.keys(response.insertedIds).map((key) => response.insertedIds[key]));
                 const insertedIds = Object.keys(response.insertedIds).map((key) => response.insertedIds[key]);
                 const filterResponse = await this.filter({ _id: insertedIds });
                 if (filterResponse.success) {

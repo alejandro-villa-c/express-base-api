@@ -34,6 +34,19 @@ module.exports = router;
         #swagger.tags = ['Users']
         #swagger.path = '/users'
         #swagger.method = 'get'
+        #swagger.parameters['sortBy'] = {
+            in: 'query',
+            type: 'string',
+            format: 'property.direction'
+        }
+        #swagger.parameters['page'] = {
+            in: 'query',
+            type: 'string'
+        }
+        #swagger.parameters['perPage'] = {
+            in: 'query',
+            type: 'string'
+        }
     */
 // #swagger.end
 // #swagger.start
@@ -98,6 +111,19 @@ module.exports = router;
         #swagger.tags = ['Users']
         #swagger.path = '/users/filter'
         #swagger.method = 'post'
+        #swagger.parameters['sortBy'] = {
+            in: 'query',
+            type: 'string',
+            format: 'property.direction'
+        }
+        #swagger.parameters['page'] = {
+            in: 'query',
+            type: 'string'
+        }
+        #swagger.parameters['perPage'] = {
+            in: 'query',
+            type: 'string'
+        }
         #swagger.parameters['startDate'] = {
             in: 'query',
             type: 'string',
