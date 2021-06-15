@@ -127,8 +127,10 @@ module.exports = class BaseRepository {
                 .limit(perPage)
                 .skip(perPage * (page - 1))
                 .exec();
+            const entitiesCount = await this.model.countDocuments({});
             this.response.data = entities;
             this.response.success = true;
+            this.response.totalRecords = entitiesCount;
         } catch (error) {
             this.response.message = error.toString();
         }
