@@ -1,13 +1,13 @@
 const setBaseRoutes = (router, service, middlewares = {
-    getAll: async (req, res, next) => next(),
-    getById: async (req, res, next) => next(),
-    create: async (req, res, next) => next(),
-    update: async (req, res, next) => next(),
-    delete: async (req, res, next) => next(),
-    filter: async (req, res, next) => next(),
-    createMany: async (req, res, next) => next()
+    getAll: (req, res, next) => next(),
+    getById: (req, res, next) => next(),
+    create: (req, res, next) => next(),
+    update: (req, res, next) => next(),
+    delete: (req, res, next) => next(),
+    filter: (req, res, next) => next(),
+    createMany: (req, res, next) => next()
 }) => {
-    router.get('/', middlewares.getAll).get('/', async (req, res, next) => {
+    router.get('/', middlewares.getAll, async (req, res, next) => {
         const sortBy = req.query.sortBy || 'createdAt.desc';
         const page = +(req.query.page) && +(req.query.page) > 0 ? +(req.query.page) : 1;
         const perPage = +(req.query.perPage) && +(req.query.perPage) > 0 ? +(req.query.perPage) : 20;
@@ -15,7 +15,7 @@ const setBaseRoutes = (router, service, middlewares = {
         res.json(response);
     });
 
-    router.get('/:id', middlewares.getById).get('/:id', async (req, res, next) => {
+    router.get('/:id', middlewares.getById, async (req, res, next) => {
         if (req.params && req.params.id) {
             const response = await service.getById(req.params.id);
             res.json(response);
@@ -24,17 +24,17 @@ const setBaseRoutes = (router, service, middlewares = {
         }
     });
 
-    router.post('/', middlewares.create).post('/', async (req, res, next) => {
+    router.post('/', middlewares.create, async (req, res, next) => {
         const response = await service.create(req.body);
         res.json(response);
     });
 
-    router.put('/', middlewares.update).put('/', async (req, res, next) => {
+    router.put('/', middlewares.update, async (req, res, next) => {
         const response = await service.update(req.body);
         res.json(response);
     });
 
-    router.delete('/:id', middlewares.delete).delete('/:id', async (req, res, next) => {
+    router.delete('/:id', middlewares.delete, async (req, res, next) => {
         if (req.params && req.params.id) {
             const response = await service.delete(req.params.id);
             res.json(response);
@@ -43,7 +43,7 @@ const setBaseRoutes = (router, service, middlewares = {
         }
     });
 
-    router.post('/filter', middlewares.filter).post('/filter', async (req, res, next) => {
+    router.post('/filter', middlewares.filter, async (req, res, next) => {
         const sortBy = req.query.sortBy || 'createdAt.desc';
         const page = +(req.query.page) && +(req.query.page) > 0 ? +(req.query.page) : 1;
         const perPage = +(req.query.perPage) && +(req.query.perPage) > 0 ? +(req.query.perPage) : 20;
@@ -53,7 +53,7 @@ const setBaseRoutes = (router, service, middlewares = {
         res.json(response);
     });
 
-    router.post('/createMany', middlewares.createMany).post('/createMany', async (req, res, next) => {
+    router.post('/createMany', middlewares.createMany, async (req, res, next) => {
         const response = await service.createMany(req.body);
         res.json(response);
     });
